@@ -5,12 +5,13 @@ variable "aws_region" {
 }
 
 variable "environment" {
-  description = "Ambiente (dev/prod)"
+  description = "Ambiente"
   type        = string
+  default     = "dev"
 }
 
 variable "project_name" {
   description = "Nome do projeto"
   type        = string
-  default     = "aws-certification-project"
+  default     = "aws-certification-dev-project"
 }

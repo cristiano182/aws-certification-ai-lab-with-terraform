@@ -4,18 +4,12 @@ on:
   push:
     branches:
       - dev
-      # - main
-    # paths:
-    #   - 'infra/**'
-
-env:
-  TF_WORKSPACE: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
 
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    environment: dev
 
     defaults:
       run:
@@ -25,18 +19,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Read AWS Region from HCL
-      id: region
-      run: |
-        REGION=$(grep "region" backend-${{ env.TF_WORKSPACE }}.hcl | cut -d'"' -f2)
-        echo "AWS_REGION=$REGION" >> $GITHUB_ENV
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: us-east-1
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -53,7 +41,7 @@ jobs:
 
     - name: Terraform Init
       id: init
-      run: terraform init -backend-config=backend-${{ env.TF_WORKSPACE }}.hcl
+      run: terraform init
 
     - name: Terraform Validate
       id: validate
@@ -61,7 +49,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -var-file=${{ env.TF_WORKSPACE }}.tfvars
+      run: terraform plan -no-color
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -var-file=${{ env.TF_WORKSPACE }}.tfvars 
+      run: terraform apply -auto-approve

@@ -1,0 +1,20 @@
+{
+  "name": "simple-lambda-app",
+  "version": "1.0.0",
+  "description": "Simple Node.js AWS Lambda app deployed with the Serverless Framework",
+  "main": "handler.js",
+  "scripts": {
+    "start": "serverless offline",
+    "deploy": "serverless deploy",
+    "remove": "serverless remove"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "serverless": "^3.39.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^13.6.0"
+  }
+}

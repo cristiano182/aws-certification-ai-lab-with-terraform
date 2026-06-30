@@ -13,7 +13,7 @@ provider:
   region: ${opt:region, 'us-east-1'}
   environment:
     STAGE: ${self:provider.stage}
-    API_KEY: ${env:API_KEY}
+    API_KEY: ${env:API_KEY, ''}
 
 functions:
   hello:

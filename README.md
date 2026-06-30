@@ -19,7 +19,7 @@ Then hit `http://localhost:3000/hello`.
 
 ## Bedrock Q&A endpoint
 
-`POST /ask` sends a question to AWS Bedrock (Claude 3 Haiku by default) and returns the answer.
+`POST /ask` sends a question to AWS Bedrock (Claude Haiku 4.5 by default) and returns the answer.
 
 ```bash
 curl -X POST http://localhost:3000/ask \

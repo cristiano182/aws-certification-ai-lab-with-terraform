@@ -56,3 +56,16 @@ keep it that way, and don't share it.
 ```bash
 npm run deploy
 ```
+
+## CI/CD
+
+`.github/workflows/ci.yml` runs on every PR and push to `main`:
+
+- **validate** (PRs and pushes): `npm ci` + `serverless package`, no AWS credentials needed.
+- **deploy** (push to `main` only): `npm ci` + `serverless deploy`, using these repo secrets
+  (Settings → Secrets and variables → Actions):
+  - `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` — credentials with permission to deploy
+    (CloudFormation, Lambda, API Gateway, IAM, S3, Logs). This needs broader access than the
+    Bedrock-only `bedrock-local-dev` user above, since it deploys the whole stack.
+  - `API_KEY` — optional, falls back to an empty string if unset.
+  - `BEDROCK_MODEL_ID` — optional, falls back to the default model in `serverless.yml`.

@@ -8,7 +8,7 @@ const client = new BedrockRuntimeClient({
   region: process.env.AWS_REGION || "us-east-1",
 });
 
-const DEFAULT_MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0";
+const DEFAULT_MODEL_ID = "anthropic.claude-haiku-4-5-20251001-v1:0";
 
 module.exports.ask = async (event) => {
   let question;

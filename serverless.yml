@@ -24,12 +24,6 @@ provider:
           Resource: "*"
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - httpApi:
-          path: /hello
-          method: get
   ask:
     handler: bedrock.ask
     events:

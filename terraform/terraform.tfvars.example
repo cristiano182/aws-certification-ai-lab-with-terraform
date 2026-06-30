@@ -1,0 +1,3 @@
+aws_region    = "us-east-1"
+aws_profile   = "cristiano.oliveira"
+iam_user_name = "bedrock-local-dev"

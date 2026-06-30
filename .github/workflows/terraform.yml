@@ -5,8 +5,8 @@ on:
     branches:
       - dev
       - main
-    paths:
-      - 'infra/**'
+    # paths:
+    #   - 'infra/**'
 
 env:
   TF_WORKSPACE: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
